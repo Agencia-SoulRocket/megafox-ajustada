@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MegaFox G2G Empresas  Soluções de conectividade corporativa com SLA garantido para empresas.">
+  <title>MegaFox G2G Empresas | Conectividade Corporativa</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            g2g: {
+              dark:   '#0a0a0a',
+              navy:   '#111111',
+              blue:   '#0b4fde',
+            }
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #12161c; color: #e2e8f0; margin: 0; }
+
+    /* Grid texture */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    /* ── HERO VIDEO SECTION ── */
+    .hero-section {
+      position: relative;
+      height: 88vh;
+      min-height: 600px;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+     filter: sepia(1) hue-rotate(190deg) saturate(1) brightness(0.80) contrast(1.25);      
+
+    }
+    /* multiply layer  darkens video tonally like multiply blend */
+    .hero-overlay-multiply {
+      position: absolute;
+      inset: 0;
+      background: rgb(245, 247, 250);
+      mix-blend-mode: multiply;
+    }
+    /* gradient for text legibility: dark at top (nav) + dark at bottom (text) */
+    .hero-overlay-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,8,8,.55) 0%,
+        rgba(8,8,8,.04) 30%,
+        rgba(6, 1, 1, 0.04) 52%,
+        rgba(8,8,8,.78) 100%
+      );
+    }
+    .hero-inner {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      padding: 0 80px;
+    }
+    .hero-top {
+      padding-top: 96px;   /* clear sticky nav */
+      flex-shrink: 0;
+      max-width: 760px;
+    }
+    .hero-bottom {
+      margin-top: auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 48px;
+      padding-bottom: 48px;
+      flex-shrink: 0;
+    }
+    .hero-headline {
+      font-size: clamp(30px, 6vw, 80px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #fff;
+    }
+    /* form card  mirrors Restin hero-box: glass, dark, floating */
+    .hero-card {
+      width: 400px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid rgba(255,255,255,0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      box-shadow: 0 20px 45px rgba(15,23,42,.18);
+    }
+    @media (max-width: 1023px) {
+      .hero-section {
+        height: auto;
+        min-height: 100svh;
+        overflow: visible;
+      }
+      .hero-inner  { position: relative; padding: 0 24px; }
+      .hero-top    { padding-top: 88px; }
+      .hero-bottom { flex-direction: column; align-items: stretch; padding-bottom: 40px; margin-top: 32px; gap: 20px; }
+      .hero-card   { width: 100%; }
+      .hero-headline { font-size: clamp(36px, 9vw, 56px); }
+    }
+
+    /* Cards */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .card:hover { border-color: #cbd5e1; box-shadow: 0 4px 16px rgba(15,23,42,.06); }
+
+    /* Form inputs */
+    .field {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 11px 14px;
+      width: 100%;
+      font-size: 14px;
+      transition: border-color .2s;
+    }
+    .field::placeholder { color: #475569; }
+    .field:focus { outline: none; border-color: #ffffff; background: rgba(255,255,255,.04); }
+    .field option { background: #111111; }
+    .field-light { background: #f8fafc; border: 1px solid #dbe2ea; color: #0f172a; }
+    .field-light::placeholder { color: #94a3b8; }
+    .field-light:focus { outline: none; border-color: #0f172a; background: #ffffff; }
+    .field-light option { background: #ffffff; color: #0f172a; }
+
+
+    /* Sticky nav */
+    #nav { transition: background .3s, box-shadow .3s; }
+    #nav.solid { background: #000; box-shadow: 0 1px 24px rgba(15,23,42,.08); }
+
+    .nav-links { color: #cbd5e1; }
+    .nav-links a:hover { color: #ffffff; }
+    #nav.solid .nav-links { color: #475569; }
+    #nav.solid .nav-links a:hover { color: #0f172a; }
+
+    .nav-toggle { color: #cbd5e1; }
+    #nav.solid .nav-toggle { color: #0f172a; }
+
+    /* #nav.solid .nav-cta { background: #0f172a; color: #fff; } */
+    /* #nav.solid .nav-cta:hover { background: #1e293b; } */
+
+    /* Mobile nav */
+    #mob-nav { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    #mob-nav.open { max-height: 320px; }
+
+    /* Gradient text */
+    .grad { background: linear-gradient(120deg, #fff 0%, #e2e8f0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* FAQ */
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-body.open { max-height: 300px; }
+    .faq-icon { transition: transform .3s; }
+    .faq-trigger.open .faq-icon { transform: rotate(180deg); }
+
+    /* Fade-up on scroll */
+    .fadein { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+    .fadein.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── SOLUTIONS SLIDER (Restin: room-section) ── */
+    .sol-section {
+      position: relative;
+      padding-top: 80px;
+      overflow: hidden;
+      background: #eef1f5;
+    }
+    /* Background image layer */
+    .sol-bg {
+      position: absolute;
+      inset: 0;
+      /* [INSERIR_IMAGEM_BG  ex: data center, cidade, fibra óptica] */
+      background: linear-gradient(135deg, #eef1f5 0%, #e4e9ef 55%, #eef1f5 100%);
+      background-size: cover;
+      background-position: center;
+    }
+    .sol-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0; /* remove opacity:0 when image is supplied */
+      filter: brightness(0.35) grayscale(0.3);
+    }
+    .sol-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(238,241,245,.4) 0%,
+        rgba(238,241,245,.15) 45%,
+        rgba(238,241,245,.55) 100%
+      );
+    }
+    /* Section header: label + title + desc LEFT | arrows RIGHT */
+    .sol-header {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 80px 40px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .sol-header-left { max-width: 580px; }
+    .sol-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+    .sol-title {
+      font-size: clamp(28px, 3.2vw, 46px);
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.1;
+      margin: 0 0 14px;
+    }
+    .sol-desc {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    /* Divider line (Restin: separator between header and slider) */
+    .sol-sep {
+      position: relative;
+      z-index: 2;
+      height: 1px;
+      background: rgba(15,23,42,.1);
+      margin: 0 80px 0;
+    }
+    /* Slider wrapper  overflow hidden para clipar o loop */
+    .sol-slider-wrap {
+      position: relative;
+      z-index: 2;
+      overflow-x: hidden;
+      overflow-y: visible;
+      padding-bottom: 72px;
+    }
+    /* Track controlado por JS (rAF loop) */
+    .sol-track {
+      display: flex;
+      gap: 20px;
+      padding-top: 40px;
+      width: max-content;
+      will-change: transform;
+    }
+    /* Setas manuais */
+    .sol-arrows { display: flex; gap: 8px; flex-shrink: 0; }
+    .sol-arrow {
+      width: 52px; height: 52px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #d8dee6;
+      color: #0f172a; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .sol-arrow:hover { background: #f1f4f8; border-color: #0f172a; color: #0f172a; }
+    .sol-arrow.active { background: #0f172a; border-color: #0f172a; color: #ffffff; }
+    /* Cards (Restin: room-box-item) */
+    .sol-card {
+      flex-shrink: 0;
+      width: 290px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: #111111;
+    }
+    /* Card image top (Restin: room-image) */
+    .sol-card-img {
+      height: 210px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+     filter: sepia(1) hue-rotate(195deg) saturate(1) brightness(0.80) contrast(1.25);      
+
+      transition: filter 0.4s ease;
+    }
+    .sol-card:hover .sol-card-img { filter: grayscale(0); }
+    .sol-card-img > img {
+      position: absolute;
+      inset: 0; width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .sol-card-icon {
+      font-size: 52px;
+      color: rgba(56,189,248,.28);
+      position: relative;
+      z-index: 1;
+      transition: color .3s, transform .3s;
+    }
+    .sol-card:hover .sol-card-icon { color: rgba(56,189,248,.55); transform: scale(1.08); }
+    /* Card body (Restin: content-item) */
+    .sol-card-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;  /* light  fiel ao Restin */
+    }
+    .sol-card-content { padding: 20px 20px 16px; flex: 1; }
+    /* Tag/badge (Restin: h6 category) */
+    .sol-card-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #e2e8f0;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 20px;
+      padding: 3px 10px;
+      margin-bottom: 10px;
+    }
+    .sol-card-tag.amber { color: #e2e8f0; border-color: rgba(255,255,255,.3); }
+    /* Title (Restin: h4) */
+    .sol-card-title {
+      font-size: 21px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.2;
+      margin: 0 0 14px;
+    }
+    /* Specs (Restin: ul list) */
+    .sol-specs { list-style: none; padding: 0; margin: 0; }
+    .sol-specs li {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: #475569; margin-bottom: 7px;
+    }
+    .sol-specs li i { color: #e2e8f0; font-size: 12px; width: 14px; text-align: center; }
+    .sol-specs li i.amber { color: #e2e8f0; }
+    /* CTA button bottom (Restin: theme-btn BOOK NOW) */
+    .sol-card-cta {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 15px 20px;
+      background: #111111;
+      color: #fff;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .sol-card-cta:hover { background: #ffffff; color: #0a0a0a; }
+    .sol-card-cta i { font-size: 11px; transition: transform .25s ease; }
+    /* CTA agora é um <button> (Saiba mais) - reset de estilos nativos */
+    button.sol-card-cta {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .sol-card.expanded .sol-card-more-btn i { transform: rotate(90deg); }
+    /* Painel expandido inline (accordion dentro do card) */
+    .sol-card-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease, padding .4s ease;
+      background: #f8fafc;
+      padding: 0 20px;
+    }
+    .sol-card.expanded .sol-card-detail {
+      max-height: 700px;
+      padding: 0 20px 18px;
+    }
+    .sol-card-detail-text {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #475569;
+      margin: 0 0 12px;
+    }
+    .sol-card-detail-text strong { color: #0f172a; }
+    .sol-card-detail-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #0f172a;
+      text-decoration: none;
+      border-bottom: 1px solid #0f172a;
+      padding-bottom: 2px;
+    }
+    .sol-card-detail-cta:hover { color: #38bdf8; border-color: #38bdf8; }
+    .sol-card-detail-cta i { font-size: 11px; }
+
+    @media (max-width: 1023px) {
+      .sol-header { padding: 0 24px 32px; flex-direction: column; align-items: flex-start; gap: 24px; }
+      .sol-sep { margin: 0 24px; }
+      .sol-track { padding: 32px 24px 0; }
+      .sol-card { width: 260px; }
+      .sol-card-img { height: 180px; }
+    }
+
+    /* ── SOBRE / DIFERENCIAIS  Restin accordion ── */
+    .sobre-section {
+      background: #eef1f5;
+      padding: 80px 0 0;
+    }
+    .sobre-head {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 80px 48px;
+      text-align: center;
+    }
+    .sobre-cards {
+      display: flex;
+      height: 540px;
+      gap: 3px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .sobre-card {
+      flex: 1;
+      min-width: 80px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sobre-card.active { flex: 4; }
+    /* Full-card photo background */
+    .sobre-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+filter: sepia(1) hue-rotate(200deg) saturate(1) brightness(0.30) contrast(1.25);      
+      transition: transform 0.6s ease, filter 0.5s ease;
+    }
+    .sobre-card:hover .sobre-card-bg { transform: scale(1.04); }
+    .sobre-card.active .sobre-card-bg { filter: grayscale(0); }
+    /* Dark gradient overlay */
+    /* .sobre-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(1, 1, 10, 0.94) 0%,
+        rgba(3, 3, 34, 0.55) 45%,
+        rgba(7, 16, 31, 0.22) 100%
+      );
+    } */
+    /* Vertical text  shown when collapsed */
+    .sobre-card-v {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+    .sobre-card.active .sobre-card-v { opacity: 0; pointer-events: none; }
+    .sobre-card-v-title {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      letter-spacing: 0.02em;
+    }
+    .sobre-card-v-link {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      color: #e2e8f0;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    /* Horizontal content panel  shown when expanded (Restin bottom panel) */
+    .sobre-card-h {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(8, 8, 8, 0.88);
+      backdrop-filter: blur(6px);
+      padding: 22px 28px 26px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.35s ease 0.18s, transform 0.35s ease 0.18s;
+      pointer-events: none;
+    }
+    .sobre-card.active .sobre-card-h {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .sobre-card-h-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .sobre-card-h-desc {
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+    .sobre-card-h-cta {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #e2e8f0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .sobre-card-h-cta:hover { color: #ffffff; }
+    @media (max-width: 1023px) {
+      .sobre-head { padding: 0 24px 36px; }
+      .sobre-cards {
+        height: auto;
+        flex-direction: column;
+        gap: 3px;
+        max-width: 100%;
+      }
+      .sobre-card {
+        flex: none !important;
+        min-width: unset;
+        height: 72px;
+        transition: height 0.55s cubic-bezier(0.4,0,0.2,1);
+      }
+      .sobre-card.active { height: 360px; }
+      .sobre-card-v {
+        flex-direction: row;
+        left: 24px;
+        transform: none;
+        bottom: 50%;
+        transform: translateY(50%);
+        gap: 12px;
+      }
+      .sobre-card-v-title,
+      .sobre-card-v-link {
+        writing-mode: horizontal-tb;
+        transform: none;
+      }
+    }
+
+    /* Button */
+    .btn-primary {
+      background: #ffffff;
+      color: #0a0a0a;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 13px 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { background: #e2e8f0; box-shadow: 0 0 24px rgba(255,255,255,.15); 
+    }
+
+    #numbersBox{
+        max-width: 1600px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ─────────────────────────────────────────────
+     NAV
+───────────────────────────────────────────── -->
+<header id="nav" class="fixed inset-x-0 top-0 z-50">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+
+    <!-- Logo (chip escuro garante contraste independente do fundo) -->
+    <a href="#" style="border-radius:8px;padding:8px 14px;display:inline-flex;align-items:center;">
+      <!-- Salve o arquivo logo-megafox-full.png na mesma pasta do HTML -->
+      <img src="https://assets.cdn.filesafe.space/JCPqJOlCKLcETosGskr5/media/6a678ca9d5a8878e0a9388f2.png" width="220px" alt="MegaFox G2G Empresas"  style="display:block;">
+    </a>
+
+    <!-- Desktop links -->
+    <nav class="hidden md:flex items-center gap-8 text-sm nav-links">
+      <a href="#solucoes" class="hover:text-white transition-colors">Soluções</a>
+      <a href="#sobre"    class="hover:text-white transition-colors">Sobre</a>
+      <a href="#faq"      class="hover:text-white transition-colors">FAQ</a>
+    </nav>
+
+    <!-- CTA -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#formulario" class="btn-primary nav-cta text-sm py-2.5 px-5">Solicitar Proposta</a>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button class="md:hidden nav-toggle p-1" onclick="document.getElementById('mob-nav').classList.toggle('open')">
+      <i class="fa-solid fa-bars text-lg"></i>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <div id="mob-nav" class="md:hidden" style="background:#f4f6f8;border-top:1px solid #e2e8f0;">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4 text-sm" style="color:#334155">
+      <a href="#solucoes"   style="color:#334155">Soluções</a>
+      <a href="#sobre"      style="color:#334155">Sobre</a>
+      <a href="#faq"        style="color:#334155">FAQ</a>
+      <a href="#formulario" class="btn-primary text-sm py-2.5 px-4 self-start" style="background:#0f172a;color:#fff">Solicitar Proposta</a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ─────────────────────────────────────────────
+     HERO  estrutura Restin: vídeo BG + headline bottom-left + form card bottom-right
+───────────────────────────────────────────── -->
+<section class="hero-section">
+
+  <!-- Vídeo de fundo (grayscale + multiply) -->
+  <!-- [INSERIR_VERSÃO_MP4_DO_VIDEO_PARA_COMPATIBILIDADE_CROSS-BROWSER] -->
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="hero-video.mov" type="video/quicktime">
+    <source src="https://assets.cdn.filesafe.space/JCPqJOlCKLcETosGskr5/media/6a678d629b2aff3b75a1052e.mp4" type="video/mp4">
+  </video>
+
+  <!-- Layer multiply (escurece tonalmente sobre o vídeo) -->
+  <div class="hero-overlay-multiply"></div>
+  <!-- Gradiente direcional para legibilidade do texto -->
+  <div class="hero-overlay-gradient"></div>
+
+  <!-- Conteúdo sobre os layers -->
+  <div class="hero-inner">
+
+    <!-- Topo esquerdo: headline grande + eyebrow -->
+    <div class="hero-top">
+      <p class="text-slate-500 text-xs font-semibold uppercase tracking-[.2em] mb-4">
+        Soluções em conectividade
+      </p>
+      <h1 class="hero-headline">
+        A conexão <br>que impulsiona<br>
+        <span style="color:#ffffff">seus negócios</span>
+      </h1>
+    </div>
+
+    <!-- Rodapé: texto de apoio + CTA esquerda + card formulário direita -->
+    <div class="hero-bottom">
+
+      <!-- Texto curto + CTA -->
+      <div class="max-w-sm">
+        <p class="text-slate-200 leading-relaxed mb-6" style="font-size:16px">
+          Conectividade empresarial sob medida para o seu negócio não parar. Soluções em internet Dedicada, redundância e suporte técnico próprio com disponibilidade garantida em contrato.
+        </p>
+        <a href="#solucoes" class="btn-primary text-sm">
+          Ver soluções
+        </a>
+      </div>
+
+      <!-- Card formulário (substitui hero-box com fotos do Restin) -->
+      <div id="formulario" class="hero-card">
+        <h2 class="text-base font-semibold mb-4" style="color:#0f172a">Solicite uma proposta</h2>
+
+        <form id="form-hero" onsubmit="handleSubmit(event,'form-hero','ok-hero')" class="space-y-3">
+          <div>
+            <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1" for="h-nome">Nome</label>
+            <input id="h-nome" name="nome" type="text" class="field field-light" style="padding:9px 12px" placeholder="Nome completo" required>
+          </div>
+          <div>
+            <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1" for="h-email">E-mail corporativo</label>
+            <input id="h-email" name="email" type="email" class="field field-light" style="padding:9px 12px" placeholder="nome@empresa.com.br" required>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1" for="h-empresa">Empresa</label>
+              <input id="h-empresa" name="empresa" type="text" class="field field-light" style="padding:9px 12px" placeholder="Razão social" required>
+            </div>
+            <div>
+              <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1" for="h-tel">WhatsApp</label>
+              <input id="h-tel" name="whatsapp" type="tel" class="field field-light phone-mask" style="padding:9px 12px" placeholder="(11) 99999-9999" required>
+            </div>
+          </div>
+          <div>
+            <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1" for="h-srv">Serviço de interesse</label>
+            <select id="h-srv" name="servico" class="field field-light" style="padding:9px 12px" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="link-dedicado">Link Dedicado</option>
+              <option value="redundancia">Redundância de Link</option>
+              <option value="lan-to-lan">LAN-to-LAN</option>
+              <option value="wifi">Wi-Fi Corporativo</option>
+              <option value="voz-ip">Voz IP / PABX</option>
+              <option value="consultoria">Consultoria / Outros</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary w-full justify-center text-sm" style="padding:11px 0;background:#0f172a;color:#fff">
+            Solicitar proposta
+          </button>
+        </form>
+
+        <div id="ok-hero" class="hidden text-center py-8">
+          <i class="fa-solid fa-circle-check text-3xl text-g2g-blue mb-3 block"></i>
+          <p class="font-semibold text-sm" style="color:#0f172a">Solicitação recebida.</p>
+          <p class="text-slate-500 text-xs mt-1">Nossa equipe entrará em contato em breve.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ─────────────────────────────────────────────
+     SOLUÇÕES  Restin: room-section
+     bg image + section-title-area (label/H2/desc LEFT, arrows RIGHT)
+     + separator + horizontal card slider
+───────────────────────────────────────────── -->
+<section id="solucoes" class="sol-section">
+
+  <!-- Background -->
+  <div class="sol-bg">
+    <!-- [INSERIR_IMAGEM_BG  foto data center, fibra óptica ou cidade noturna] -->
+    <img class="sol-bg-img" src="" alt="">
+  </div>
+  <div class="sol-bg-overlay"></div>
+
+  <!-- Header: texto esq + setas dir (Restin: section-title-area) -->
+  <div class="sol-header">
+    <div class="sol-header-left">
+      <p class="sol-label">Portfólio de Soluções</p>
+      <h2 class="sol-title">Soluções<br>Corporativas</h2>
+      <p class="sol-desc">Conectividade e infraestrutura para o seu negócio crescer sem interrupções.<br><br>De conexões de alta estabilidade à interligação de filiais, desenvolvemos projetos sob medida para empresas que precisam de máxima disponibilidade, segurança e suporte especializado.</p>
+    </div>
+    <div class="sol-arrows">
+      <button class="sol-arrow" id="sol-prev" onclick="solNav(-1)" aria-label="Anterior">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="sol-arrow active" id="sol-next" onclick="solNav(1)" aria-label="Próximo">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Linha separadora (Restin: hr/border) -->
+  <div class="sol-sep"></div>
+
+  <!-- Slider horizontal (Restin: swiper room-slider) -->
+  <div class="sol-slider-wrap">
+    <div class="sol-track" id="sol-track">
+
+      <!-- Card 1: Link Dedicado -->
+      <div class="sol-card">
+        <div class="sol-card-img" style="background:linear-gradient(rgba(7,21,37,.55),rgba(13,34,64,.72)),url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80') center/cover no-repeat">
+          <i class="fa-solid fa-network-wired sol-card-icon"></i>
+        </div>
+        <div class="sol-card-body">
+          <div class="sol-card-content">
+            <span class="sol-card-tag">Conectividade</span>
+            <h3 class="sol-card-title">Link Dedicado</h3>
+            <ul class="sol-specs">
+              <li><i class="fa-solid fa-gauge-high"></i>Banda exclusiva garantida</li>
+              <li><i class="fa-solid fa-file-contract"></i>SLA contratual</li>
+            </ul>
+          </div>
+          <div class="sol-card-detail">
+            <p class="sol-card-detail-text">Uma conexão de internet exclusiva da sua empresa, com banda garantida de entrada e saída (100% simétrica) — sem dividir capacidade com nenhum outro cliente.</p>
+            <p class="sol-card-detail-text"><strong>Por que importa:</strong> a velocidade que você contrata é a velocidade que você tem, no horário de pico ou fora dele. Videoconferência, ERP em nuvem, VPN e sistemas críticos param de oscilar. E, por ser dedicado, o serviço é elegível a SLA formalizado em contrato — com prazo de reparo definido, não "melhor esforço".</p>
+            <a href="#formulario" class="sol-card-detail-cta">Solicitar proposta <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <button type="button" class="sol-card-cta sol-card-more-btn" aria-expanded="false">
+            <span class="sol-card-cta-label">Saiba mais</span> <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Redundância de Link -->
+      <div class="sol-card">
+        <div class="sol-card-img" style="background:linear-gradient(rgba(21,15,0,.55),rgba(42,29,0,.72)),url('https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=600&q=80') center/cover no-repeat">
+          <i class="fa-solid fa-rotate sol-card-icon"></i>
+        </div>
+        <div class="sol-card-body">
+          <div class="sol-card-content">
+            <span class="sol-card-tag amber">Disponibilidade</span>
+            <h3 class="sol-card-title">Redundância de Link</h3>
+            <ul class="sol-specs">
+              <li><i class="fa-solid fa-shield-halved amber"></i>Failover automático</li>
+              <li><i class="fa-solid fa-infinity amber"></i>Continuidade operacional</li>
+            </ul>
+          </div>
+          <div class="sol-card-detail">
+            <p class="sol-card-detail-text">Um segundo link, em rota independente, que assume automaticamente se o principal cair. A troca é feita por failover automático, sem intervenção manual.</p>
+            <p class="sol-card-detail-text"><strong>Por que importa:</strong> rede fora do ar é faturamento parado, NF-e travada, PDV sem autorização e equipe ociosa. A redundância transforma uma queda de horas em uma transição de segundos, que na prática ninguém percebe.</p>
+            <a href="#formulario" class="sol-card-detail-cta">Solicitar proposta <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <button type="button" class="sol-card-cta sol-card-more-btn" aria-expanded="false">
+            <span class="sol-card-cta-label">Saiba mais</span> <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3: LAN-to-LAN -->
+      <div class="sol-card">
+        <div class="sol-card-img" style="background:linear-gradient(rgba(6,14,28,.55),rgba(12,26,48,.72)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80') center/cover no-repeat">
+          <i class="fa-solid fa-building-user sol-card-icon"></i>
+        </div>
+        <div class="sol-card-body">
+          <div class="sol-card-content">
+            <span class="sol-card-tag">Multi-Unidades</span>
+            <h3 class="sol-card-title">LAN-to-LAN</h3>
+            <ul class="sol-specs">
+              <li><i class="fa-solid fa-lock"></i>Rede privada segura</li>
+              <li><i class="fa-solid fa-server"></i>Integração de ERP</li>
+            </ul>
+          </div>
+          <div class="sol-card-detail">
+            <p class="sol-card-detail-text">Interliga as redes locais de matriz, filiais, CDs e lojas em uma única rede privada, sem trafegar pela internet pública.</p>
+            <p class="sol-card-detail-text"><strong>Por que importa:</strong> todas as unidades acessam o mesmo ERP, o mesmo servidor de arquivos e o mesmo sistema de gestão como se estivessem no mesmo prédio — com mais velocidade que uma VPN sobre internet e sem expor os dados da operação ao tráfego público.</p>
+            <a href="#formulario" class="sol-card-detail-cta">Solicitar proposta <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <button type="button" class="sol-card-cta sol-card-more-btn" aria-expanded="false">
+            <span class="sol-card-cta-label">Saiba mais</span> <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4: Wi-Fi Corporativo -->
+      <div class="sol-card">
+        <div class="sol-card-img" style="background:linear-gradient(rgba(7,18,32,.55),rgba(12,28,52,.72)),url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80') center/cover no-repeat">
+          <i class="fa-solid fa-wifi sol-card-icon"></i>
+        </div>
+        <div class="sol-card-body">
+          <div class="sol-card-content">
+            <span class="sol-card-tag">Cobertura</span>
+            <h3 class="sol-card-title">Wi-Fi Corporativo</h3>
+            <ul class="sol-specs">
+              <li><i class="fa-solid fa-expand"></i>Cobertura gerenciada</li>
+              <li><i class="fa-solid fa-users-gear"></i>Controle centralizado</li>
+            </ul>
+          </div>
+          <div class="sol-card-detail">
+            <p class="sol-card-detail-text">Projeto de cobertura sem fio dimensionado para o seu espaço (escritório, galpão, chão de fábrica, área de atendimento), com gestão centralizada de acessos e redes separadas para equipe e visitantes.</p>
+            <p class="sol-card-detail-text"><strong>Por que importa:</strong> acaba o ponto cego e a queda ao andar pelo prédio. O TI controla quem acessa o quê a partir de um único painel, isola a rede de visitantes da rede da operação e reduz risco de segurança sem precisar de equipamento próprio.</p>
+            <a href="#formulario" class="sol-card-detail-cta">Solicitar proposta <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <button type="button" class="sol-card-cta sol-card-more-btn" aria-expanded="false">
+            <span class="sol-card-cta-label">Saiba mais</span> <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 5: Voz IP / PABX -->
+      <div class="sol-card">
+        <div class="sol-card-img" style="background:linear-gradient(rgba(8,20,32,.55),rgba(14,30,48,.72)),url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=600&q=80') center/cover no-repeat">
+          <i class="fa-solid fa-phone-volume sol-card-icon"></i>
+        </div>
+        <div class="sol-card-body">
+          <div class="sol-card-content">
+            <span class="sol-card-tag">Telefonia</span>
+            <h3 class="sol-card-title">Voz IP / PABX</h3>
+            <ul class="sol-specs">
+              <li><i class="fa-solid fa-cloud"></i>PABX em nuvem</li>
+              <li><i class="fa-solid fa-star"></i>Planos customizados</li>
+            </ul>
+          </div>
+          <div class="sol-card-detail">
+            <p class="sol-card-detail-text">Central telefônica em nuvem: ramais, URA, gravação de chamadas, filas de atendimento e relatórios — sem central física instalada na empresa.</p>
+            <p class="sol-card-detail-text"><strong>Por que importa:</strong> o ramal acompanha o colaborador no celular ou no home office, abrir uma nova unidade não exige obra nem novo equipamento, e o custo de manutenção da central física sai da conta. Escala por ramal, conforme o time cresce.</p>
+            <a href="#formulario" class="sol-card-detail-cta">Solicitar proposta <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <button type="button" class="sol-card-cta sol-card-more-btn" aria-expanded="false">
+            <span class="sol-card-cta-label">Saiba mais</span> <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 6: Internet para PMEs -->
+      <div class="sol-card">
+        <div class="sol-card-img" style="background:linear-gradient(rgba(6,16,30,.55),rgba(10,24,44,.72)),url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=600&q=80') center/cover no-repeat">
+          <i class="fa-solid fa-store sol-card-icon"></i>
+        </div>
+        <div class="sol-card-body">
+          <div class="sol-card-content">
+            <span class="sol-card-tag">Pequenas e Médias</span>
+            <h3 class="sol-card-title">Internet para PMEs</h3>
+            <ul class="sol-specs">
+              <li><i class="fa-solid fa-bolt"></i>Ativação expressa</li>
+              <li><i class="fa-solid fa-circle-check"></i>Planos sob medida</li>
+            </ul>
+          </div>
+          <div class="sol-card-detail">
+            <p class="sol-card-detail-text">Planos de conectividade corporativa com ativação expressa, dimensionados para empresas menores que precisam de estabilidade sem estrutura de link dedicado de grande porte.</p>
+            <p class="sol-card-detail-text"><strong>Por que importa:</strong> qualidade e suporte de provedor corporativo em um plano compatível com o porte do negócio — e com caminho de upgrade pronto quando a empresa crescer.</p>
+            <a href="#formulario" class="sol-card-detail-cta">Solicitar proposta <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <button type="button" class="sol-card-cta sol-card-more-btn" aria-expanded="false">
+            <span class="sol-card-cta-label">Saiba mais</span> <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 7: Grandes Empresas -->
+      <div class="sol-card">
+        <div class="sol-card-img" style="background:linear-gradient(rgba(8,18,32,.55),rgba(14,30,52,.72)),url('https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&q=80') center/cover no-repeat">
+          <i class="fa-solid fa-city sol-card-icon"></i>
+        </div>
+        <div class="sol-card-body">
+          <div class="sol-card-content">
+            <span class="sol-card-tag">Grandes Empresas</span>
+            <h3 class="sol-card-title">Soluções Corporativas</h3>
+            <ul class="sol-specs">
+              <li><i class="fa-solid fa-arrow-up-right-dots"></i>Capacidade escalável</li>
+              <li><i class="fa-solid fa-diagram-project"></i>Projeto sob medida</li>
+            </ul>
+          </div>
+          <div class="sol-card-detail">
+            <p class="sol-card-detail-text">Projetos de conectividade de alta capacidade, desenhados sob medida: múltiplos links, topologia redundante, integração com data center e nuvem, e engenharia de rede dedicada ao ambiente do cliente.</p>
+            <p class="sol-card-detail-text"><strong>Por que importa:</strong> empresas com operação crítica não cabem em plano de prateleira. Aqui a arquitetura é dimensionada para a demanda real, com capacidade escalável e um interlocutor técnico único do projeto à operação.</p>
+            <a href="#formulario" class="sol-card-detail-cta">Solicitar proposta <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <button type="button" class="sol-card-cta sol-card-more-btn" aria-expanded="false">
+            <span class="sol-card-cta-label">Saiba mais</span> <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /sol-track -->
+  </div><!-- /sol-slider-wrap -->
+
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ─────────────────────────────────────────────
+     COBERTURA / NÚMEROS
+───────────────────────────────────────────── -->
+<section class="py-20 max-w-8xl mx-auto px-6" id="numbersBox">
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 rounded-2xl overflow-hidden shadow-sm fadein">
+
+    <div class="bg-white px-3 py-10 text-center">
+      <p class="text-3xl font-bold text-slate-900 mb-1">+ 17 anos</p>
+      <p class="text-slate-500 text-sm mb-2">De mercado</p>
+      <p class="text-slate-400 text-xs leading-relaxed">Tradição e solidez no setor de conectividade, acompanhando o crescimento das empresas da região desde 2007.</p>
+    </div>
+    <div class="bg-white px-3 py-10 text-center">
+      <p class="text-3xl font-bold text-slate-900 mb-1">+ 20</p>
+      <p class="text-slate-500 text-sm  mb-2">Municípios em SP</p>
+      <p class="text-slate-400 text-xs leading-relaxed">Presença de fibra própria nas principais regiões corporativas do interior paulista.</p>
+    </div>
+    <div class="bg-white px-3 py-10 text-center">
+      <p class="text-3xl font-bold text-g2g-blue mb-1">99,5% SLA</p>
+      <p class="text-slate-500 text-sm mb-2">Qualidade de serviço garantida</p>
+      <p class="text-slate-400 text-xs leading-relaxed">Compromisso formal de atendimento, suporte e disponibilidade da conexão, tudo definido em contrato.</p>
+    </div>
+    <div class="bg-white px-3 py-10 text-center">
+      <p class="text-3xl font-bold text-slate-900 mb-1">24 / 7</p>
+      <p class="text-slate-500 text-sm mb-2">Monitoramento ativo</p>
+      <p class="text-slate-400 text-xs leading-relaxed">Suporte técnico e monitoramento contínuo da infraestrutura, todos os dias da semana, sem interrupção.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ─────────────────────────────────────────────
+     SOBRE / DIFERENCIAIS  estilo Restin accordion
+───────────────────────────────────────────── -->
+<section id="sobre" class="sobre-section">
+
+  <!-- Cabeçalho centralizado -->
+  <div class="sobre-head fadein">
+    <p class="text-g2g-blue text-xs font-semibold uppercase tracking-[.18em] mb-3">Sobre a MegaFox G2G Empresas</p>
+    <h2 class="text-3xl font-bold" style="color:#0f172a">Nossos diferenciais</h2>
+  </div>
+
+  <!-- Accordion de cards -->
+  <div class="sobre-cards" id="sobre-cards">
+
+    <!-- Card 1: Infraestrutura Própria -->
+    <div class="sobre-card active">
+      <div class="sobre-card-bg" style="background-image:url('https://assets.cdn.filesafe.space/JCPqJOlCKLcETosGskr5/media/6a7b83224e002388f4d4e16d.png')"></div>
+      <div class="sobre-card-overlay"></div>
+      <div class="sobre-card-v">
+        <span class="sobre-card-v-title">Infraestrutura Própria</span>
+        <a href="#formulario" class="sobre-card-v-link">Ver detalhes</a>
+      </div>
+      <div class="sobre-card-h">
+        <h3 class="sobre-card-h-title">Infraestrutura Própria</h3>
+        <p class="sobre-card-h-desc">Rede de fibra óptica exclusiva, sem dependência de terceiros. Capacidade técnica total sobre o circuito contratado.</p>
+        <a href="#formulario" class="sobre-card-h-cta">Solicitar proposta <i class="fa-solid fa-chevron-right"></i></a>
+      </div>
+    </div>
+
+    <!-- Card 2: Equipe Especializada -->
+    <div class="sobre-card">
+      <div class="sobre-card-bg" style="background-image:url('https://assets.cdn.filesafe.space/JCPqJOlCKLcETosGskr5/media/6a7b83221eb55bdfc3ade619.png')"></div>
+      <div class="sobre-card-overlay"></div>
+      <div class="sobre-card-v">
+        <span class="sobre-card-v-title">Equipe Especializada</span>
+        <a href="#formulario" class="sobre-card-v-link">Ver detalhes</a>
+      </div>
+      <div class="sobre-card-h">
+        <h3 class="sobre-card-h-title">Equipe Especializada</h3>
+        <p class="sobre-card-h-desc">Suporte técnico local com atendimento 24/7. Engenheiros acompanham implantação, operação e expansão dos projetos.</p>
+        <a href="#formulario" class="sobre-card-h-cta">Solicitar proposta <i class="fa-solid fa-chevron-right"></i></a>
+      </div>
+    </div>
+
+    <!-- Card 3: Alta Disponibilidade -->
+    <div class="sobre-card">
+      <div class="sobre-card-bg" style="background-image:url('https://assets.cdn.filesafe.space/JCPqJOlCKLcETosGskr5/media/6a7b83229115899f038a133d.png')"></div>
+      <div class="sobre-card-overlay"></div>
+      <div class="sobre-card-v">
+        <span class="sobre-card-v-title">Alta Disponibilidade</span>
+        <a href="#formulario" class="sobre-card-v-link">Ver detalhes</a>
+      </div>
+      <div class="sobre-card-h">
+        <h3 class="sobre-card-h-title">Alta Disponibilidade</h3>
+        <p class="sobre-card-h-desc">SLA contratual acima de 99,5% em links dedicados. Monitoramento proativo com acionamento preventivo antes de qualquer impacto.</p>
+        <a href="#formulario" class="sobre-card-h-cta">Solicitar proposta <i class="fa-solid fa-chevron-right"></i></a>
+      </div>
+    </div>
+
+    <!-- Card 4: Projetos Sob Medida -->
+    <div class="sobre-card">
+      <div class="sobre-card-bg" style="background-image:url('https://assets.cdn.filesafe.space/JCPqJOlCKLcETosGskr5/media/6a7b83221eb55bdfc3ade619.png')"></div>
+      <div class="sobre-card-overlay"></div>
+      <div class="sobre-card-v">
+        <span class="sobre-card-v-title">Projetos Sob Medida</span>
+        <a href="#formulario" class="sobre-card-v-link">Ver detalhes</a>
+      </div>
+      <div class="sobre-card-h">
+        <h3 class="sobre-card-h-title">Projetos Sob Medida</h3>
+        <p class="sobre-card-h-desc">Arquitetura dimensionada conforme porte, segmento e demanda. Cada projeto desenvolvido do zero para o ambiente do cliente.</p>
+        <a href="#formulario" class="sobre-card-h-cta">Solicitar proposta <i class="fa-solid fa-chevron-right"></i></a>
+      </div>
+    </div>
+
+  </div><!-- /sobre-cards -->
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ─────────────────────────────────────────────
+     FAQ
+───────────────────────────────────────────── -->
+<section id="faq" class="py-24" style="background:#f4f6f8">
+  <div class="max-w-3xl mx-auto px-6">
+
+    <div class="mb-12 fadein">
+      <p class="text-g2g-blue text-xs font-semibold uppercase tracking-[.18em] mb-3">Perguntas Frequentes</p>
+      <h2 class="text-3xl font-bold text-slate-900">Dúvidas sobre as soluções</h2>
+    </div>
+
+    <div class="space-y-2 fadein">
+
+      <div class="card rounded-xl overflow-hidden">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+          <span class="text-slate-800 text-sm font-medium pr-6">Qual a diferença entre link dedicado e acesso compartilhado?</span>
+          <i class="fa-solid fa-chevron-down faq-icon text-g2g-blue text-sm flex-shrink-0"></i>
+        </button>
+        <div class="faq-body px-6">
+          <p class="text-slate-500 text-sm leading-relaxed pb-5">No link dedicado a capacidade contratada é exclusiva  não há compartilhamento com outros clientes. Isso garante performance estável, latência previsível e elegibilidade para SLA contratual. O acesso compartilhado, por sua vez, distribui a capacidade entre múltiplos usuários, com performance variável nos horários de pico.</p>
+        </div>
+      </div>
+
+      <div class="card rounded-xl overflow-hidden">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+          <span class="text-slate-800 text-sm font-medium pr-6">Qual o prazo de implantação após aprovação da proposta?</span>
+          <i class="fa-solid fa-chevron-down faq-icon text-g2g-blue text-sm flex-shrink-0"></i>
+        </button>
+        <div class="faq-body px-6">
+          <p class="text-slate-500 text-sm leading-relaxed pb-5">O prazo médio de implantação é de 5 a 15 dias úteis, variando conforme a solução e a localidade. Projetos que envolvem obras de infraestrutura podem demandar prazos adicionais, comunicados formalmente no escopo técnico.</p>
+        </div>
+      </div>
+
+      <div class="card rounded-xl overflow-hidden">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+          <span class="text-slate-800 text-sm font-medium pr-6">Como se dá o processo de migração do provedor atual?</span>
+          <i class="fa-solid fa-chevron-down faq-icon text-g2g-blue text-sm flex-shrink-0"></i>
+        </button>
+        <div class="faq-body px-6">
+          <p class="text-slate-500 text-sm leading-relaxed pb-5">A MegaFox G2G Empresas conduz o projeto de migração de forma a preservar a continuidade operacional. O novo circuito é ativado e testado previamente. A transição ocorre de forma controlada, com janela de manutenção acordada com o cliente para minimizar ou eliminar interrupções.</p>
+        </div>
+      </div>
+
+      <div class="card rounded-xl overflow-hidden">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+          <span class="text-slate-800 text-sm font-medium pr-6">Como funciona o atendimento técnico pós-implantação?</span>
+          <i class="fa-solid fa-chevron-down faq-icon text-g2g-blue text-sm flex-shrink-0"></i>
+        </button>
+        <div class="faq-body px-6">
+          <p class="text-slate-500 text-sm leading-relaxed pb-5">O suporte é prestado 24 horas por dia, 7 dias por semana, por equipe técnica especializada. Para contratos de link dedicado, o SLA de atendimento é formalizado em contrato. A infraestrutura é monitorada proativamente, com acionamento preventivo antes de eventuais impactos ao cliente.</p>
+        </div>
+      </div>
+
+      <div class="card rounded-xl overflow-hidden">
+        <button class="faq-trigger w-full flex items-center justify-between px-6 py-5 text-left hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+          <span class="text-slate-800 text-sm font-medium pr-6">A MegaFox G2G Empresas atende empresas com múltiplas unidades?</span>
+          <i class="fa-solid fa-chevron-down faq-icon text-g2g-blue text-sm flex-shrink-0"></i>
+        </button>
+        <div class="faq-body px-6">
+          <p class="text-slate-500 text-sm leading-relaxed pb-5">Sim. A solução LAN-to-LAN foi desenvolvida para este cenário: interliga as redes locais de diferentes unidades em uma rede privada, possibilitando comunicação segura, compartilhamento de sistemas e integração de ERP entre filiais, sem exposição ao tráfego público de internet.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ─────────────────────────────────────────────
+     CTA FINAL + FORM
+───────────────────────────────────────────── -->
+<section class="py-24 grid-bg" style="background:#f4f6f8">
+  <div class="max-w-5xl mx-auto px-6">
+
+    <div class="grid lg:grid-cols-5 gap-12 items-start">
+
+      <!-- Left: copy + contatos -->
+      <div class="lg:col-span-2 fadein">
+        <p class="text-g2g-blue text-xs font-semibold uppercase tracking-[.18em] mb-3">Próximos passos</p>
+        <h2 class="text-3xl font-bold leading-snug mb-5" style="color:#0f172a">
+          Solicite uma proposta personalizada
+        </h2>
+        <p class="text-slate-600 text-sm leading-relaxed mb-10">
+          Preencha o formulário ao lado. Um especialista da MegaFox G2G Empresas entra em contato para entender suas necessidades e apresentar uma arquitetura adequada ao seu ambiente.
+        </p>
+
+      </div>
+
+      <!-- Right: form -->
+      <div class="lg:col-span-3 card rounded-2xl p-8 fadein">
+        <form id="form-bottom" onsubmit="handleSubmit(event,'form-bottom','ok-bottom')" class="space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1.5" for="b-nome">Nome</label>
+              <input id="b-nome" name="nome" type="text" class="field field-light" placeholder="Nome completo" required>
+            </div>
+            <div>
+              <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1.5" for="b-empresa">Empresa</label>
+              <input id="b-empresa" name="empresa" type="text" class="field field-light" placeholder="Razão social" required>
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1.5" for="b-email">E-mail corporativo</label>
+              <input id="b-email" name="email" type="email" class="field field-light" placeholder="nome@empresa.com.br" required>
+            </div>
+            <div>
+              <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1.5" for="b-tel">WhatsApp</label>
+              <input id="b-tel" name="whatsapp" type="tel" class="field field-light phone-mask" placeholder="(11) 99999-9999" required>
+            </div>
+          </div>
+          <div>
+            <label class="block text-slate-500 text-xs uppercase tracking-wider mb-1.5" for="b-srv">Serviço de interesse</label>
+            <select id="b-srv" name="servico" class="field field-light" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="link-dedicado">Link Dedicado</option>
+              <option value="redundancia">Redundância de Link</option>
+              <option value="lan-to-lan">LAN-to-LAN</option>
+              <option value="wifi">Wi-Fi Corporativo</option>
+              <option value="voz-ip">Voz IP / PABX</option>
+              <option value="consultoria">Consultoria / Outros</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary w-full justify-center text-sm mt-1" style="background:#0f172a;color:#fff">
+            Enviar solicitação
+          </button>
+          <p class="text-slate-500 text-xs text-center">
+            <i class="fa-solid fa-lock mr-1"></i>Seus dados são tratados com confidencialidade.
+          </p>
+        </form>
+
+        <div id="ok-bottom" class="hidden text-center py-10">
+          <i class="fa-solid fa-circle-check text-4xl text-g2g-blue mb-4 block"></i>
+          <p class="font-semibold" style="color:#0f172a">Solicitação recebida.</p>
+          <p class="text-slate-500 text-sm mt-1">Nossa equipe entrará em contato em breve.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────────
+     FOOTER
+───────────────────────────────────────────── -->
+<footer class="border-t" style="background:#000000;border-color:#e2e8f0;">
+  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+
+    <div class="flex items-center gap-3">
+      <!-- Salve o arquivo logo-megafox-icon.png na mesma pasta do HTML -->
+      <span>
+        <img src="https://assets.cdn.filesafe.space/JCPqJOlCKLcETosGskr5/media/6a678ca9d5a8878e0a9388f2.png" width="180px" alt="MegaFox G2G Empresas" style="display:block;">
+      </span>
+      <span class="text-slate-500 text-sm">Conectividade Corporativa</span>
+    </div>
+
+    <div class="flex items-center gap-6 text-slate-500 text-xs">
+      <span>© 2026 MegaFox G2G Empresas. Todos os direitos reservados.</span>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- ─────────────────────────────────────────────
+     SCRIPTS
+───────────────────────────────────────────── -->
+<script>
+  // Sticky nav
+  addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('solid', scrollY > 40);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      document.getElementById('mob-nav').classList.remove('open');
+    });
+  });
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const body = btn.nextElementSibling;
+    const open = body.classList.contains('open');
+    document.querySelectorAll('.faq-body.open').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.faq-trigger.open').forEach(b => b.classList.remove('open'));
+    if (!open) { body.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  // Form submit
+  function handleSubmit(e, formId, okId) {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const data = Object.fromEntries(fd.entries());
+    data.form = formId;
+    data.ts = new Date().toISOString();
+    console.log('[G2G Lead]', data);
+    // TODO: POST to CRM endpoint
+    // fetch('/api/leads', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) });
+    document.getElementById(formId).classList.add('hidden');
+    document.getElementById(okId).classList.remove('hidden');
+  }
+
+  // Phone mask
+  document.querySelectorAll('.phone-mask').forEach(el => {
+    el.addEventListener('input', function () {
+      let v = this.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+      else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+      else if (v.length) v = `(${v}`;
+      this.value = v;
+    });
+  });
+
+  // Fade-in on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fadein').forEach(el => obs.observe(el));
+
+  // ── SOBRE accordion (Restin style) ──
+  document.querySelectorAll('.sobre-card').forEach(card => {
+    card.addEventListener('mouseenter', function () {
+      document.querySelectorAll('.sobre-card').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+  // Keep first card active by default  on touch devices use click
+  document.querySelectorAll('.sobre-card').forEach(card => {
+    card.addEventListener('click', function () {
+      document.querySelectorAll('.sobre-card').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // ── SOLUTIONS SLIDER: auto-scroll + setas manuais ──
+  (function () {
+    const track = document.getElementById('sol-track');
+    if (!track) return;
+
+    // 1. Duplicar cards para loop infinito sem salto visual
+    Array.from(track.querySelectorAll('.sol-card'))
+      .forEach(c => track.appendChild(c.cloneNode(true)));
+
+    const SPEED     = 0.095;  // px por ms  ajuste para velocidade
+    const CARD_STEP = 310;   // px por clique de seta (290 largura + 20 gap)
+    const RESUME_MS = 4000;  // ms sem interação para retomar auto-scroll
+
+    let x           = 0;
+    let autoScroll  = true;
+    let lastTs      = null;
+    let resumeTimer = null;
+
+    // Largura do set original (metade do track duplicado)
+    function halfW() { return track.scrollWidth / 2; }
+
+    // Normaliza x dentro do range [0, halfW)
+    function normalize() {
+      const h = halfW();
+      x = ((x % h) + h) % h;
+    }
+
+    // rAF loop principal
+    function tick(ts) {
+      if (lastTs === null) lastTs = ts;
+      const dt = Math.min(ts - lastTs, 50); // cap para evitar salto após tab oculta
+      lastTs = ts;
+
+      if (autoScroll) {
+        x += SPEED * dt;
+        normalize();
+      }
+
+      track.style.transform = `translateX(-${x}px)`;
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // Setas manuais  pausam auto-scroll e retomam após RESUME_MS
+    window.solNav = function (dir) {
+      autoScroll = false;
+      clearTimeout(resumeTimer);
+      x += dir * CARD_STEP;
+      normalize();
+      resumeTimer = setTimeout(() => { if (!anyExpanded()) autoScroll = true; }, RESUME_MS);
+    };
+
+    // ── Botão "Saiba mais": expande/recolhe o card inline (accordion) ──
+    function anyExpanded() {
+      return !!track.querySelector('.sol-card.expanded');
+    }
+
+    track.addEventListener('click', function (e) {
+      const btn = e.target.closest('.sol-card-more-btn');
+      if (!btn) return;
+      const card = btn.closest('.sol-card');
+      const willExpand = !card.classList.contains('expanded');
+
+      // Fecha qualquer outro card aberto para manter o slider organizado
+      track.querySelectorAll('.sol-card.expanded').forEach(c => {
+        if (c !== card) {
+          c.classList.remove('expanded');
+          const otherBtn = c.querySelector('.sol-card-more-btn');
+          otherBtn.setAttribute('aria-expanded', 'false');
+          otherBtn.querySelector('.sol-card-cta-label').textContent = 'Saiba mais';
+        }
+      });
+
+      card.classList.toggle('expanded', willExpand);
+      btn.setAttribute('aria-expanded', String(willExpand));
+      btn.querySelector('.sol-card-cta-label').textContent = willExpand ? 'Ver menos' : 'Saiba mais';
+
+      // Pausa o auto-scroll enquanto houver card expandido; retoma quando fechar
+      clearTimeout(resumeTimer);
+      if (anyExpanded()) {
+        autoScroll = false;
+      } else {
+        resumeTimer = setTimeout(() => { if (!anyExpanded()) autoScroll = true; }, RESUME_MS);
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
